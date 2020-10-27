@@ -8,6 +8,8 @@ public class Player_jump : MonoBehaviour
     float jump_power = 15f;
     GameObject  player;
     Rigidbody2D player_rid;
+
+    Player_controll player_Controll;
     bool        is_hit = false;
     [SerializeField] GameObject jump_point;
 
@@ -29,6 +31,7 @@ public class Player_jump : MonoBehaviour
             player_rid = other.GetComponent<Rigidbody2D>();
             player_rid.bodyType = RigidbodyType2D.Dynamic;
             player = other.gameObject;
+            player.GetComponent<Player_controll>().enabled = false;
             player.transform.position = jump_point.transform.position;
             player.transform.position += new Vector3(0,2,0);
             gm.Push_start();
@@ -42,5 +45,6 @@ public class Player_jump : MonoBehaviour
         float add_x = Mathf.Sin(rad);
         float add_y = Mathf.Cos(rad);
         player_rid.AddForce(new Vector2(add_x,add_y) * gm.power * jump_power);
+        player.GetComponent<Player_controll>().enabled = true;
     }
 }

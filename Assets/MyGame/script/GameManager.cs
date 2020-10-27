@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,11 +26,19 @@ public class GameManager : MonoBehaviour
     UIManager um;
 
     public GameObject player;
+    Tilemap_generate tilemap_gene;
+
+    float gene_point = 0;
+
+    public bool is_gameover = false;
 
     void Start()
     {
         um = GameObject.Find("UIManager").GetComponent<UIManager>();
         player = GameObject.Find("Player");
+        tilemap_gene = this.GetComponent<Tilemap_generate>();
+        tilemap_gene.Map_generator(1500, 6, 3);
+        Time.timeScale = 1;
     }
 
     void FixedUpdate()
@@ -42,6 +51,10 @@ public class GameManager : MonoBehaviour
         }
         if (start_x != 0)
             distance = player.transform.position.x - start_x;
+        if (is_gameover){
+            um.Gameover_UI();
+            Time.timeScale = 0;
+        }
     }
 
     public void Push_start(){
@@ -98,5 +111,13 @@ public class GameManager : MonoBehaviour
         is_jump = true;
         start_x = player.transform.position.x;
         um.score.gameObject.SetActive(true);
+        um.jump_btn.SetActive(true);
+    }
+
+    public void Retry_load(){
+        SceneManager.LoadScene("main");
+    }
+    public void Title_load(){
+        SceneManager.LoadScene("title");
     }
 }
