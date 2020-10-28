@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,6 +33,10 @@ public class GameManager : MonoBehaviour
 
     public bool is_gameover = false;
 
+    public bool is_start = false;
+    [SerializeField] CinemachineVirtualCamera vc;
+
+
     void Start()
     {
         um = GameObject.Find("UIManager").GetComponent<UIManager>();
@@ -39,6 +44,7 @@ public class GameManager : MonoBehaviour
         tilemap_gene = this.GetComponent<Tilemap_generate>();
         tilemap_gene.Map_generator(1500, 6, 3);
         Time.timeScale = 1;
+        vc.m_Lens.OrthographicSize = 5;
     }
 
     void FixedUpdate()
@@ -55,9 +61,13 @@ public class GameManager : MonoBehaviour
             um.Gameover_UI();
             Time.timeScale = 0;
         }
+        if (is_start){
+            vc.m_Lens.OrthographicSize = 5;
+        }
     }
 
     public void Push_start(){
+        vc.m_Lens.OrthographicSize = 15;
         is_power = true;
         um.power_btn.SetActive(true);
         um.power_slider.gameObject.SetActive(true);

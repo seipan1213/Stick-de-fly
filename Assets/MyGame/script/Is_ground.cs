@@ -12,15 +12,13 @@ public class Is_ground : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "ground"){
-            Debug.Log(player_Con.jump_point);
-            player_Con.jump_point = 2;
+            player_Con.char_now.Reset_jump();
             player_Con.is_ground = true;
         }
     }
 
     void OnTriggerExit2D(Collider2D other) {
         if (other.tag == "ground"){
-            player_Con.jump_point = 1;
             player_Con.is_ground = false;
         }
     }
