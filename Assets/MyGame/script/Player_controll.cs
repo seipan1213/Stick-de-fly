@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
+using System.Text.RegularExpressions;
+
 public class Player_controll : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -13,15 +15,13 @@ public class Player_controll : MonoBehaviour
 
 
     GameManager gm;
-    [SerializeField] Character[] char_ch = new Character[4];
+    [SerializeField] public Character char_now;
 
-    public Character   char_now;
     void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         rig = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
-        char_now = char_ch[is_char];
     }
 
     // Update is called once per frame
@@ -39,6 +39,9 @@ public class Player_controll : MonoBehaviour
         }
         if (is_ground)
             gm.is_start = true;
+        if (rig.gravityScale != char_now.weight){
+            rig.gravityScale = char_now.weight * 0.85f;
+        }
         //if (Input.GetKey(KeyCode.D)){
         //    anim.SetBool("Run",true);
         //}
@@ -49,7 +52,7 @@ public class Player_controll : MonoBehaviour
 
     public void Player_jump(){
         Debug.Log("jump");
-        if (char_now.jump_point > 0){
+        if (char_now.jump_point > 0 || is_ground){
             anim.SetInteger("Jump",1);
             rig.velocity = new Vector3(rig.velocity.x,0,0);
             rig.AddForce(Vector3.up * char_now.jump * 100);
@@ -57,37 +60,5 @@ public class Player_controll : MonoBehaviour
                 char_now.jump_point--;
         }
 
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "item"){
-            Destroy(other.gameObject);
-            item_point++;
-            if (item_point == 5){
-                is_char++;
-                char_now = char_ch[is_char];
-                anim.runtimeAnimatorController = char_now.run_anim;
-                item_point = 0;
-            }
-        }
-    }
-}
-
-
-[System.Serializable]
-public class Character
-{
-    public RuntimeAnimatorController run_anim;
-    public float speed;
-    public float jump;
-
-    public float jump_point_max;
-    public float jump_point;
-
-    Character(){
-        jump_point = jump_point_max;
-    }
-    public void Reset_jump(){
-        jump_point = jump_point_max;
     }
 }

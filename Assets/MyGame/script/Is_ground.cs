@@ -10,7 +10,7 @@ public class Is_ground : MonoBehaviour
         player_Con = gameObject.transform.root.GetComponent<Player_controll>();
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
+    void OnTriggerStay2D(Collider2D other) {
         if (other.tag == "ground"){
             player_Con.char_now.Reset_jump();
             player_Con.is_ground = true;

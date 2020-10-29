@@ -9,7 +9,7 @@ public class Tilemap_generate : MonoBehaviour
 
   [SerializeField] Tile tile;
 	[SerializeField] Tile up_title;
-	[SerializeField] GameObject item;
+	[SerializeField] public GameObject[] items = new GameObject[8];
   public int ch_tile = 0;
 	public float item_spwn = 10;
 
@@ -45,7 +45,6 @@ public class Tilemap_generate : MonoBehaviour
 		return map;
 	}
 
-
 	public static void UpdateMap(int[,] map, Tilemap tilemap) //マップとタイルマップを取得し、null タイルを必要箇所に設定する
 	{
 		for (int x = 0; x < map.GetUpperBound(0); x++)
@@ -62,7 +61,7 @@ public class Tilemap_generate : MonoBehaviour
 			}
 		}
 	}
-	public static void RenderMap(int[,] map, Tilemap tilemap,TileBase tile,TileBase up_tile, GameObject item, float item_spwn)
+	public static void RenderMap(int[,] map, Tilemap tilemap,TileBase tile,TileBase up_tile, GameObject[] items, float item_spwn)
 	{
 		bool is_item;
 		//マップをクリアする（重複しないようにする）
@@ -84,7 +83,7 @@ public class Tilemap_generate : MonoBehaviour
 				}
 				else{
 					if (x > 0 && x % item_spwn == 0 && !is_item){
-						GameObject go = Instantiate(item,new Vector3Int(x, y, 0), Quaternion.identity);
+						GameObject go = Instantiate(items[Random.Range(0,items.GetUpperBound(0))],new Vector3Int(x, y, 0), Quaternion.identity);
 						go.transform.position = tilemap.transform.position + new Vector3(x * 0.4f, y * 0.4f + 0.2f, 0);
 						is_item = true;
 					}
@@ -150,7 +149,7 @@ public class Tilemap_generate : MonoBehaviour
         int[,] map = GenerateArray(size,30,true);
         //float map_x;
         map = RandomWalkTopSmoothed(map, min_sec, rb);
-        RenderMap(map, layerGround, tile,up_title,item, item_spwn);
+        RenderMap(map, layerGround, tile,up_title,items, item_spwn);
         //map_x = layerGround[ch_tile].gameObject.transform.position.x;
         //if (ch_tile == 0)
         //    ch_tile = 1;

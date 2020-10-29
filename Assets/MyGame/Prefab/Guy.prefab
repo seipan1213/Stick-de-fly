@@ -136,8 +136,8 @@ GameObject:
   - component: {fileID: 4001090322742775836}
   - component: {fileID: 4001090322742775824}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
+  m_Name: Guy
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -250,7 +250,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.03
-  m_GravityScale: 3.07
+  m_GravityScale: 8.11
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -270,33 +270,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   is_ground: 0
   item_point: 0
-  char_ch:
-  - run_anim: {fileID: 9100000, guid: 90271b3b294714445ac4966f9aa2526d, type: 2}
-    speed: 3
-    jump: 6
-    jump_point_max: 2
-    jump_point: 2
-  - run_anim: {fileID: 9100000, guid: 6ac0e25ba97b7e141ae436910b3b5fb5, type: 2}
-    speed: 4
-    jump: 7
-    jump_point_max: 2
-    jump_point: 2
-  - run_anim: {fileID: 9100000, guid: e07989ceae56052418c80186b7cc4cfe, type: 2}
-    speed: 5
-    jump: 8
-    jump_point_max: 2
-    jump_point: 2
-  - run_anim: {fileID: 9100000, guid: 5598c0c13054cc44d8708b6b0ea24cd0, type: 2}
-    speed: 6
-    jump: 9
-    jump_point_max: 2
-    jump_point: 2
   char_now:
-    run_anim: {fileID: 0}
-    speed: 0
-    jump: 0
-    jump_point_max: 0
-    jump_point: 0
+    run_anim: {fileID: 9100000, guid: 90271b3b294714445ac4966f9aa2526d, type: 2}
+    speed: 3
+    weight: 3
+    jump: 5
+    jump_point_max: 1
+    jump_point: 1
+    item_power: 2
 --- !u!95 &4001090322742775824
 Animator:
   serializedVersion: 3
