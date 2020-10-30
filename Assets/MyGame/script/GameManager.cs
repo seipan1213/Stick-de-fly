@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         um = GameObject.Find("UIManager").GetComponent<UIManager>();
-        player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player");
         tilemap_gene = this.GetComponent<Tilemap_generate>();
         tilemap_gene.Map_generator(1500, 6, 3);
         Time.timeScale = 1;
