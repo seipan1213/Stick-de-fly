@@ -271,13 +271,17 @@ MonoBehaviour:
   is_ground: 0
   item_point: 0
   char_now:
-    run_anim: {fileID: 0}
+    run_anim: {fileID: 9100000, guid: 5598c0c13054cc44d8708b6b0ea24cd0, type: 2}
     speed: 5
     weight: 5
     jump: 13
     jump_point_max: 1
     jump_point: 1
     item_power: 0.5
+    jump_min: 4
+    speed_min: 2
+    weight_min: 1
+    jump_point_max_min: 0
 --- !u!95 &4001090322742775824
 Animator:
   serializedVersion: 3

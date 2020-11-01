@@ -8,6 +8,7 @@ TagManager:
   - item
   - char_item
   - diamond
+  - characters
   layers:
   - Default
   - TransparentFX

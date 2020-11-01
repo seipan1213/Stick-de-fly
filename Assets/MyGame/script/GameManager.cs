@@ -4,16 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using UnityEngine.Advertisements;
 
 public class GameManager : MonoBehaviour
 {
     public float power = 0f;
     public float angle = 0f;
-
     float power_speed = 0.3f;
-
     float angel_speed = 0.9f;
-
     float jump_score = 0;
     float max_angle = 358f;
     float min_angle = 270f;
@@ -36,15 +34,31 @@ public class GameManager : MonoBehaviour
     public bool is_start = false;
     [SerializeField] CinemachineVirtualCamera vc;
 
+    public RewardedAdsScript rewardADS;
 
+    public DataManager dataManager;
+
+    public Transform Player_res;
+
+    [SerializeField] GameObject data_go;
+
+    [SerializeField] public GameObject[] chars = new GameObject[8];
     void Start()
     {
+        if (!GameObject.Find("DataManager"))
+            Instantiate(data_go).name = "DataManager";
+        dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
         um = GameObject.Find("UIManager").GetComponent<UIManager>();
+        rewardADS = this.GetComponent<RewardedAdsScript>();
+        Debug.Log(dataManager.now_char);
+        Instantiate(chars[dataManager.now_char],Player_res.position,Player_res.rotation);
         player = GameObject.FindWithTag("Player");
+        vc.Follow = player.transform;
+        vc.LookAt = player.transform;
         tilemap_gene = this.GetComponent<Tilemap_generate>();
         tilemap_gene.Map_generator(1500, 6, 3);
         Time.timeScale = 1;
-        vc.m_Lens.OrthographicSize = 5;
+        vc.m_Lens.OrthographicSize = 6;
     }
 
     void FixedUpdate()
@@ -62,7 +76,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
         }
         if (is_start){
-            vc.m_Lens.OrthographicSize = 5;
+            vc.m_Lens.OrthographicSize = 6;
         }
     }
 
@@ -125,9 +139,9 @@ public class GameManager : MonoBehaviour
     }
 
     public void Retry_load(){
-        SceneManager.LoadScene("main");
+        rewardADS.ShowRewardedVideo("main");
     }
     public void Title_load(){
-        SceneManager.LoadScene("title");
+        rewardADS.ShowRewardedVideo("title");
     }
 }

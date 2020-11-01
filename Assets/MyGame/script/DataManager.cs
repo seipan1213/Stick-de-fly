@@ -8,10 +8,9 @@ public class DataManager : MonoBehaviour
 
     public int diamond = 0;
     public int coin = 0;
-
     public string user_name = "???";
-    public int now_char;
-    public bool[] is_char;
+    public int now_char = 0;
+    public bool[] is_char = new bool[8];
     void Start()
     {
 

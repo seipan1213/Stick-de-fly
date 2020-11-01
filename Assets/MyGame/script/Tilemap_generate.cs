@@ -11,7 +11,7 @@ public class Tilemap_generate : MonoBehaviour
 	[SerializeField] Tile up_title;
 	[SerializeField] public GameObject[] items = new GameObject[8];
   public int ch_tile = 0;
-	public float item_spwn = 10;
+	public float item_spwn = 50;
 
 	// Start is called before the first frame update
 	void Start()
@@ -95,7 +95,7 @@ public class Tilemap_generate : MonoBehaviour
 	{
 
 		//開始位置を特定する
-		int lastHeight = Random.Range(0, map.GetUpperBound(1));
+		int lastHeight = Random.Range(10, map.GetUpperBound(1));
 
     int lastmax = 2;
 
@@ -113,7 +113,7 @@ public class Tilemap_generate : MonoBehaviour
       	lastHeight = lastmax;
       }
 			//セクション幅の最小限の値より大きい現在の高さを使用した場合にのみ、高さを変更する
-			if ((nextMove == 0 || nextMove == 3) && lastHeight > 0 && sectionWidth > minSectionWidth)
+			if ((nextMove == 0 || nextMove == 3) && lastHeight > 10 && sectionWidth > minSectionWidth)
 			{
 				lastHeight -= Random.Range(1,rd);
 				if (lastHeight < 2)
@@ -146,7 +146,7 @@ public class Tilemap_generate : MonoBehaviour
 	}
 
     public void Map_generator(int size, int min_sec, int rb){
-        int[,] map = GenerateArray(size,30,true);
+        int[,] map = GenerateArray(size,40,true);
         //float map_x;
         map = RandomWalkTopSmoothed(map, min_sec, rb);
         RenderMap(map, layerGround, tile,up_title,items, item_spwn);

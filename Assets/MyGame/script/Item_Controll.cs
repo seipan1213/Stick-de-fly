@@ -20,7 +20,6 @@ public class Item_Controll : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.GetComponent<Player_controll>()){
-            Debug.Log(other.name);
             item.Attach(other.GetComponent<Player_controll>());
             Destroy(this.gameObject);
         }

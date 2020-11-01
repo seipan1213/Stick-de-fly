@@ -278,6 +278,10 @@ MonoBehaviour:
     jump_point_max: 1
     jump_point: 1
     item_power: 2
+    jump_min: 3.28
+    speed_min: 2
+    weight_min: 1
+    jump_point_max_min: 0
 --- !u!95 &4001090322742775824
 Animator:
   serializedVersion: 3

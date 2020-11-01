@@ -22,6 +22,7 @@ public class Player_controll : MonoBehaviour
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         rig = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
+        anim.runtimeAnimatorController = char_now.run_anim;
     }
 
     // Update is called once per frame
@@ -51,7 +52,6 @@ public class Player_controll : MonoBehaviour
     }
 
     public void Player_jump(){
-        Debug.Log("jump");
         if (char_now.jump_point > 0 || is_ground){
             anim.SetInteger("Jump",1);
             rig.velocity = new Vector3(rig.velocity.x,0,0);
