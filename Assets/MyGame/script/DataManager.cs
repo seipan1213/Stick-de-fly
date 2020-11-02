@@ -11,6 +11,10 @@ public class DataManager : MonoBehaviour
     public string user_name = "???";
     public int now_char = 0;
     public bool[] is_char = new bool[8];
+
+    public float movie_time = 1800;
+
+    public float adv;
     void Start()
     {
 
@@ -23,6 +27,8 @@ public class DataManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (adv >= 0){
+            adv -= Time.deltaTime *100;
+        }
     }
 }

@@ -9,6 +9,7 @@ public class RewardedAdsScript : MonoBehaviour, IUnityAdsListener {
     string myPlacementId = "rewardedVideo";
     bool testMode = true;
     public string scene = "main";
+    DataManager dm;
 
     // Initialize the Ads listener and service:
     void Start () {
@@ -31,15 +32,19 @@ public class RewardedAdsScript : MonoBehaviour, IUnityAdsListener {
     public void OnUnityAdsDidFinish (string placementId, ShowResult showResult) {
         // Define conditional logic for each ad completion status:
         if (showResult == ShowResult.Finished) {
-            Debug.Log(ShowResult.Finished);
-            if (scene != "")
+            if (scene != ""){
                 SceneManager.LoadScene(scene);
+            }else{
+                dm = GameObject.Find("DataManager").GetComponent<DataManager>();
+                dm.diamond += 2;
+                dm.adv = dm.movie_time;
+            }
             // Reward the user for watching the ad to completion.
         } else if (showResult == ShowResult.Skipped) {
             Debug.Log(ShowResult.Skipped);
             // Do not reward the user for skipping the ad.
         } else if (showResult == ShowResult.Failed) {
-            Debug.Log(ShowResult.Skipped);
+            Debug.Log(ShowResult.Failed);
             Debug.LogWarning ("The ad did not finish due to an error.");
         }
     }

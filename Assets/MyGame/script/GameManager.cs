@@ -23,25 +23,16 @@ public class GameManager : MonoBehaviour
     public float start_x = 0;
     public float distance;
     UIManager um;
-
     public GameObject player;
     Tilemap_generate tilemap_gene;
-
     float gene_point = 0;
-
     public bool is_gameover = false;
-
     public bool is_start = false;
     [SerializeField] CinemachineVirtualCamera vc;
-
     public RewardedAdsScript rewardADS;
-
     public DataManager dataManager;
-
     public Transform Player_res;
-
     [SerializeField] GameObject data_go;
-
     [SerializeField] public GameObject[] chars = new GameObject[8];
     void Start()
     {
@@ -115,7 +106,6 @@ public class GameManager : MonoBehaviour
         }
         um.angel_img.rectTransform.Rotate(0, 0, ch_rotate);
     }
-
     IEnumerator Non_power()
     {
         um.power_btn.SetActive(false);
@@ -137,7 +127,6 @@ public class GameManager : MonoBehaviour
         um.score.gameObject.SetActive(true);
         um.jump_btn.SetActive(true);
     }
-
     public void Retry_load(){
         rewardADS.ShowRewardedVideo("main");
     }

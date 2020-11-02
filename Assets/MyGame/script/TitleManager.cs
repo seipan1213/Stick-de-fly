@@ -23,6 +23,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] Text    user_name_t;
 
     [SerializeField] GameObject data_go;
+
     public DataManager dataManager;
 
     public RewardedAdsScript rewardADS;
@@ -60,7 +61,8 @@ public class TitleManager : MonoBehaviour
     }
 
     public void Push_Ads(){
-        rewardADS.ShowRewardedVideo("");
+        if (dataManager.adv <= 0)
+            rewardADS.ShowRewardedVideo("");
     }
 
     public void Push_Shop(){
